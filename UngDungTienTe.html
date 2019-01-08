@@ -1,0 +1,53 @@
+<html>
+
+<head>
+
+    <title>Ứng dụng chuyển đổi tiền tệ</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+    table, th, td {
+        padding: 10px;
+    }
+    #btn{
+        background-color: #1f7aff;
+        padding: 5px;
+        color: aliceblue;
+    }
+</style>
+</head>
+
+<body style="font-family:arial;background-color:lavender">
+
+<H1>Ứng dụng chuyển đổi tiền tệ:</H1>
+<table>
+    <tr>
+        <th>Amount:</th>
+        <th>From currency :</th>
+        <th>To currency :</th>
+    </tr>
+    <tr>
+        <td><input id="SoLuong"></td>
+        <td><select id="Currency">
+            <option value="23000">VietNam</option>
+            <option value="23000">USD</option>
+        </select></td>
+        <td><select id="Tocurrency">
+            <option value="1">USD</option>
+            <option value="23000">VNĐ</option>
+        </select></td>
+        <td><button id="btn" onclick="myFunction()">Convert</button></td>
+    </tr>
+</table>
+<h4 id="Kq" style="color:blue"></h4>
+<script>
+    function  myFunction() {
+        var sl=parseInt(document.getElementById("SoLuong").value);
+        var rate=parseInt(document.getElementById("Currency").value/document.getElementById("Tocurrency").value);
+        var kq=sl*rate;
+        document.getElementById("Kq").innerHTML="Result :"+kq;
+    }
+</script>
+</body>
+
+</html>
