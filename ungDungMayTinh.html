@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNG DUNG MAY TINH</title>
+    <style>
+        input {
+            padding: 5px;
+        }
+        body{
+            background-color: aquamarine;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div>
+<b>Caculator</b>
+<br>
+<br>
+<input id="a" type="text">&nbsp;<input id="b" type="text">
+<br>
+<br>
+<button onclick="cong()">Addition(+)</button>&nbsp;<button onclick="tru()">Subtraction(-)</button>&nbsp;<button onclick="nhan()">Multiplication(x)</button>&nbsp;<button onclick="chia()">devition(/)</button>
+<h4 id="Kq" style="color:blue"></h4>
+</div>
+<hr>
+
+<script type="text/javascript">
+    function cong() {
+        var a=parseInt(document.getElementById("a").value);
+        var b=parseInt(document.getElementById("b").value);
+        var kqcong=a+b;
+        document.getElementById("Kq").innerHTML="Result :"+kqcong;
+    }
+    function  tru() {
+        var a=parseInt(document.getElementById("a").value);
+        var b=parseInt(document.getElementById("b").value);
+        var kqtru=a-b;
+        document.getElementById("Kq").innerHTML="Result :"+kqtru;
+    }
+    function  nhan() {
+        var a=parseInt(document.getElementById("a").value);
+        var b=parseInt(document.getElementById("b").value);
+        var kqnhan=a*b;
+        document.getElementById("Kq").innerHTML="Result :"+kqnhan;
+    }
+    function chia() {
+        var a=parseInt(document.getElementById("a").value);
+        var b=parseInt(document.getElementById("b").value);
+        var kqchia=a/b;
+        document.getElementById("Kq").innerHTML="Result :"+kqchia;
+    }
+</script>
+</body>
+</html>
