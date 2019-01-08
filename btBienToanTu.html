@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Biến, kiểu dữ liệu và toán tử</title>
+</head>
+<body>
+<button onclick="myFunction()">Chương trình tính điểm Sinh viên</button>
+</body>
+<script>
+    function  myFunction () {
+
+        var  vl=parseFloat(prompt("Xin vui lòng nhập điểm VẬT LÝ của bạn"));
+        var  hh=parseFloat(prompt("Xin vui lòng nhập điểm HÓA HỌC của bạn"));
+        var  sh=parseFloat(prompt("Xin vui lòng nhập điểm SINH HỌC của bạn"));
+
+        var ĐTB=(vl+hh+sh)/3;
+        var Sum=vl+hh+sh;
+
+        document.write("Điểm trung bình là :"+ĐTB);
+        document.write("</br>");
+        document.write("Tổng điểm sinh viên là :"+Sum);
+    }
+</script>
+</html>
