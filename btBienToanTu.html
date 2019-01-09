@@ -13,13 +13,24 @@
         var  vl=parseFloat(prompt("Xin vui lòng nhập điểm VẬT LÝ của bạn"));
         var  hh=parseFloat(prompt("Xin vui lòng nhập điểm HÓA HỌC của bạn"));
         var  sh=parseFloat(prompt("Xin vui lòng nhập điểm SINH HỌC của bạn"));
+        if(isNaN(vl) || isNaN(hh) || isNaN(sh) ) {
+            alert("Bạn đã nhập chữ từ bàn phím !!!");
+        }
+        else if(vl<0 || hh <0 || sh <0)
+        {
+          alert("Số bạn nhập  là số âm(-)")
+        }
+        else{
+            var ĐTB = (vl + hh + sh) / 3;
+            var Sum = vl + hh + sh;
 
-        var ĐTB=(vl+hh+sh)/3;
-        var Sum=vl+hh+sh;
+            document.write("Điểm trung bình là :" + ĐTB);
+            document.write("</br>");
+            document.write("Tổng điểm sinh viên là :" + Sum);
 
-        document.write("Điểm trung bình là :"+ĐTB);
-        document.write("</br>");
-        document.write("Tổng điểm sinh viên là :"+Sum);
+
+        }
+
     }
 </script>
 </html>
