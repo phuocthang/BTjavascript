@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="xephang"></p>
+<script>
+var weight=parseFloat(prompt("Nhập cân nặng của bạn :"));
+var height=parseFloat(prompt("Nhập chiều cao của bạn"));
+var bmi=weight / height;
+   if (bmi < 18)
+       ocument.getElementById("xephang").innerHTML="Underweight";
+   else if (bmi < 25.0)
+       document.getElementById("xephang").innerHTML="Nomal";
+   else if (bmi < 30.0)
+       ocument.getElementById("xephang").innerHTML="Overweight";
+   else
+       document.getElementById("xephang").innerHTML="chỉ số :"+"<b style='color: red'>"+"Obese"+"</b>";
+</script>
+
+</body>
+</html>

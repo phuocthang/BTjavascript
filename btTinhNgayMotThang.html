@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tính ngày 1 tháng</title>
+</head>
+
+<body>
+<div style="width: 100%;text-align: center;" >
+ <b>ứng dụng đếm ngày 1 tháng</b>
+    <br>
+    <br>
+    <input id="songay" placeholder="Nhập tháng 1 -> 12" />&nbsp;<button onclick="tinhngay()" id="btntinhngay" style="border-radius: 8px; padding: 3px;margin-left: 5px;width: 140px;">tính số ngày</button>
+    <p id="ketqua"></p>
+</div>
+<script>
+function  tinhngay() {
+    var ngay=parseInt(document.getElementById("songay").value);
+    switch (ngay) {
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 1:
+            document.getElementById("ketqua").innerHTML="<b>" + "Tháng"+"("+ngay+")"+"có 31 ngày"+"</b>";
+            break;
+        case 2:
+            document.getElementById("ketqua").innerHTML="<b>" + "Tháng"+"("+ngay+")"+"có 28 or 29 ngày"+"</b>";
+        default:
+            document.getElementById("ketqua").innerHTML="<b style='color: red'>"+"Bạn đã nhập quá số tháng !!!"+"</b>";
+    }
+}
+</script>
+</body>
+</html>
