@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function numberMax(number1,number2) {
+   if(number1 <= number2 ){
+       var sum=number1+number2;
+       return sum;
+   }else {
+       alert("Số thứ nhất:"+number1+"Lớn hơn số thứ 2:"+number2);
+   }
+  }
+  var number1= parseInt(prompt("Số thứ 1:"));
+  var number2=parseInt(prompt("Số thứ 2:"));
+  var result=numberMax(number1,number2);
+  document.write(result);
+</script>
+</body>
+</html>

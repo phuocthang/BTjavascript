@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function giaiThua(number) {
+        gt=1;
+        for(var i=1;i<=number;i++){
+            var gt=gt*i;
+        }
+     return gt;
+    }
+    var number=parseInt(prompt("Nhập số:"));
+    var result=giaiThua(number);
+    document.write(result);
+</script>
+</body>
+</html>

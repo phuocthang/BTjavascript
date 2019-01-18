@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<input type="checkbox" id="good"  onclick="fc()">good
+<input type="checkbox" id="fast"  onclick="fc()">fast
+<input type="checkbox" id="cheap" onclick="fc()">cheap
+<SCRIPT>
+function  fc() {
+ if( document.getElementById("good").checked===true && document.getElementById("fast").checked===true ){
+     document.getElementById("cheap").checked = false;
+ }else if( document.getElementById("fast").checked===true && document.getElementById("cheap").checked===true ){
+     document.getElementById("good").checked= false;
+ }else if(document.getElementById("cheap").checked===true && document.getElementById("good").checked===true  ){
+
+     document.getElementById("fast").checked=false;
+ }
+}
+
+
+</SCRIPT>
+</body>
+</html>

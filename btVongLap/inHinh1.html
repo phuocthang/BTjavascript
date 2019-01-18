@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var sout;
+    sout = "<table >"
+    for (var i = 0; i <= 5; i++) {
+        sout = sout + "<tr>";
+        for (var j =1; j<=i  ; j++) {
+            sout = sout + "<td>"+"*"+ "</td>";
+        }
+        sout = sout + "</tr>";
+    }
+    sout = sout + "</table>";
+    document.write (sout);
+
+    var sout;
+    sout = "<table >"
+    for (var i = 0; i <= 5; i++) {
+        sout = sout + "<tr>";
+        for (var j = 5-i; j >=1 ; --j) {
+            sout = sout + "<td>"+"*"+ "</td>";
+        }
+        sout = sout + "</tr>";
+    }
+    sout = sout + "</table>";
+    document.write (sout);
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function  hamNguyenam(kytu) {
+        switch (kytu) {
+            case "a":
+            case "e":
+            case "o":
+            case "i":
+            case "u":
+                return true;
+                break;
+            default:
+                return false;
+        }
+    }
+    var kytu=prompt("Nhập 1  ký tự [a-z]:");
+    var result=hamNguyenam(kytu);
+    document.write("kết quả:"+"<b>"+result+"</b>");
+</script>
+</body>
+</html>

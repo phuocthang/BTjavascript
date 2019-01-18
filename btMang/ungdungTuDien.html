@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Dien</title>
+</head>
+<body>
+<h2 style="text-align: center">Từ Điển Anh việt</h2>
+<div style="text-align:center;">
+<b style="color: #2e6da4">Englisht:</b><input type="text" id="eng">  ==>
+    <b style="color: red">VietNamese:</b> <input type="text" id="vn">
+    </br>
+    </br>
+    <p id="errors"></p>
+    </br>
+    <button type="button" onclick="myFunction()">Covert</button>
+</div>
+<script>
+  function   myFunction() {
+      var engl = document.getElementById("eng").value;
+      var arrayEng = ["love", "hug", "name", "good", "programmer"];
+      var arrayVn = ["yêu", "ôm", "tên", "tốt", "lập trình viên"];
+      var timthay = false;
+
+      for (var i = 0; i < arrayEng.length; i++) {
+          if (engl == arrayEng[i] ) {
+              document.getElementById("vn").value = arrayVn[i];
+              timthay = true;
+              break;
+          }
+      }
+      if(timthay==false){
+          document.getElementById('errors').innerText="Không tìm thấy";
+      }
+  }
+</script>
+</body>
+</html>

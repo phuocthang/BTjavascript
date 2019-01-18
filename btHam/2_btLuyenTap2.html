@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function chuVi(bankinh) {
+        var chu_vi=bankinh*2*3.14;
+        return chu_vi;
+    }
+
+    function dienTich(bankinh) {
+        var dien_tich=bankinh**(2)*3.14;
+        return dien_tich;
+    }
+    var bankinh=parseInt(prompt("Nhập chiều dài"));
+    var cv=chuVi(bankinh);
+    var dt=dienTich(bankinh);
+    document.write("chu vi là :"+cv+"</br>"+"diện tích là:"+dt);
+</script>
+</body>
+</html>

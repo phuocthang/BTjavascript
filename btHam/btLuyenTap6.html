@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 style="text-align: center">Tìm sao</h2>
+<div style="text-align:center;">
+    <b style="color: #2e6da4">Tên ngôi sao:</b><input type="text" id="name">  ==>
+    <b style="color: red">Chòm sao:</b> <input type="text" id="start">
+    </br>
+    </br>
+    <p id="errors"></p>
+    </br>
+    <button type="button" onclick="timSao()">Covert</button>
+</div>
+<script>
+
+    function  timSao(){
+        var nhapsao = document.getElementById("name").value;
+        var ngoiSao = ['Polaris','Aldebaran','Deneb','vega',' Altair','Dubhe ','Regulus'];
+        var chomSao = ['Ursa Minor','Tarurus','Cygnus','lyra','Aquila','Ursa Major','Leo'];
+        var timthay = false;
+        for (var i = 0; i < ngoiSao.length; i++) {
+            if (nhapsao == ngoiSao[i] ) {
+                document.getElementById("start").value = chomSao[i];
+                timthay = true;
+                break;
+            }
+        }
+        if(timthay==false){
+            document.getElementById('errors').innerText="Không tìm thấy";
+        }
+        
+    }
+</script>
+</body>
+</html>

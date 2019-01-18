@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function daoMang(so1,so2) {
+        var ms = [];
+        ms.push(so1);
+        ms.push(so2);
+         var cuoi=ms.length-1;
+        for (var i = 0; i < cuoi; i++) {
+            var c =ms[i];
+            ms[i]=ms[cuoi];
+            ms[cuoi]=c;
+
+
+        }
+        return ms;
+    }
+    var so1=prompt("Số thứ 1");
+    var so2=prompt("Số thứ 2");
+    var result=daoMang(so1,so2);
+    document.write(result);
+
+</script>
+</body>
+</html>

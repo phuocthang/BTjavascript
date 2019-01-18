@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var number=parseInt(prompt("So luong so nguyen to"));
+    var num =2;
+    var slsnt= 0;
+    while(slsnt <= number){
+        if(num  === 2|| num === 3 || num === 5 || num  === 7){
+            num++;
+            slsnt ++;
+
+        }else {
+            if (num % 2 == 0|| num % 3 == 0 || num % 5 == 0 || num % 7== 0 ){
+        num++;
+            }else{
+             document.write(num);
+             document.write("</br>");
+             num ++;
+             slsnt++;
+
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="puzzles">
+        <img id="img1" src="1.jpg" alt="" />
+        <img id="img2" src="2.jpg" alt="" />
+        <img id="img3" src="3.jpg" alt="" />
+        <img id="img4" src="4.jpg" alt="" />
+        <img id="img5" src="5.jpg" alt="" />
+    </div>
+</div>
+<script>
+    var main = function () {
+
+
+        var numb = Math.floor((Math.random() * 10));
+
+        $("#img1").click(function(){
+            document.getElementById("img1").src=numb+".jpg";
+        });
+        $("#img2").click(function(){
+            document.getElementById("img2").src=numb+".jpg";
+        });
+        $("#img3").click(function(){
+            document.getElementById("img3").src=numb+".jpg";
+        });
+        $("#img4").click(function(){
+            document.getElementById("img4").src=numb+".jpg";
+        });
+        $("#img5").click(function(){
+            document.getElementById("img5").src=numb +".jpg"   ;
+        });
+
+
+
+    }
+    $(document).ready(main());
+</script>
+</body>
+</html>
