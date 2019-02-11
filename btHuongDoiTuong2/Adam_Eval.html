@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="fistAppler"></div>
+<div id="qTao"></div>
+<div id="aDam"></div>
+<div id="eVal"></div>
+<button onclick="antao()">ăn ăn</button>
+<button onclick="themtao()">them</button>
+<script>
+class AppLe{
+    constructor (weight){
+     this.weight = weight;
+    }
+    // Apple(){
+    //
+    // }
+    deCrease(){
+      // themtao.weight +=5;
+        this.weight +=5;
+    }
+    isEmpty(){
+    if(this.weight < 0) {
+        return false;
+    }else {
+        return true;
+    }
+
+    }
+    getWeight(){
+    return this.weight;
+    }
+
+}
+class Human extends AppLe{
+    constructor(name,gender,weightH) {
+        super();
+        this.name = name;
+        this.gender = gender;
+        this.weightH = weightH;
+    }
+
+    isMale(){
+        if(this.gender){
+            return "Nam";
+        }else {
+            return "Nữ"
+        }
+    }
+
+    checkApple(weighttao){
+     if(weighttao.weight < 0){
+         alert("Hết táo !!! bạn đang ăn vỏ táo");
+         return false;
+     }else{
+         alert("Táo con !!!")
+     }
+    }
+    eat(tao){
+         alert("Cho xin một miếng !!!");
+         tao.weight-=5;
+
+    }
+
+    say(){
+        alert("Hello i am Human");
+        this.eat();
+     }
+    getName(){
+        return this.name;
+    }
+    setName(name){
+        return this.name = name;
+    }
+    getWeight(){
+     return this.weightH;
+    }
+    setWeight(weightH){
+
+        return this.weightH = weightH;
+    }
+}
+var callapple = new AppLe(10);
+var adam = new Human("Adam",true,40);
+var eva = new Human("Eval",false,35);
+document.getElementById("fistAppler").innerHTML=("Khối lượng quả táo ban đầu: "+callapple.getWeight());
+
+document.getElementById("aDam").innerHTML ="họ tên:"+adam.getName()+"</br>"+"Giới tính :"+adam.isMale()+"</br>"+"Cân nặng:"+adam.getWeight();
+function  antao() {
+    adam.eat(this.callapple);
+    document.getElementById("qTao").innerHTML="Khối lượng quả táo sau khi (Adam) ăn: "+callapple.weight;
+    adam.checkApple(callapple);
+}
+function themtao() {
+    callapple.deCrease();
+    document.getElementById("qTao").innerHTML="Khối lượng quả táo sau khi (Adam) thêm: "+callapple.weight;
+}
+</script>
+</body>
+</html>

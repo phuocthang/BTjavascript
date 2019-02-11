@@ -6,16 +6,19 @@
 </head>
 <body>
 <script>
+    function findMinxScore(){
     var x = [1,2,3,5];
     var max = x[0];
     var index = 0;
     for(let i = 1; i <x.length; i++){
-        if(x[i] > max){
+        if(x[i] < max){
             max = x[i];
             index = i;
         }
     }
     alert("max: " + max + " at position " + index);
+}
+findMinxScore();
 </script>
 </body>
 </html>

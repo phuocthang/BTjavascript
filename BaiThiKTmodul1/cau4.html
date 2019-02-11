@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Câu 4 :</title>
+</head>
+<body>
+<p id="kq"></p>
+<canvas id="myCanvas" width="1300px" height="700px" style="border:1px solid #d3d3d3;"></canvas>
+<script>
+	class Rectangle {
+		constructor(x,y,width,height,color)
+		{
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+		}
+		render(){
+			var ctx = document.getElementById("myCanvas").getContext("2d");
+			ctx.fillStyle = this.color;
+			ctx.fillRect(this.x,this.y,this.width,this.height);
+		}
+	}
+	hinhChunhat = new Rectangle(10,10,200,100,"#000000");
+	hinhChunhat.render();
+</script>
+</body>
+</html>

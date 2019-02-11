@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tàu </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <canvas id="MyCanvas" width="1350" height="640"></canvas>
+    <script>
+        const friction = 0.7; // luc ma sat
+        const FPS = 30;// khung hình/s
+        const tau_size = 30;// kích thước tàu
+        const vatthe_size = 100;// kich thuot vt
+        const vatthe_vt = 50; // van toc vat the
+        const vatthe_dinh = 10; // đỉnh của vt
+        const vatthe_rangcua = 0.4;  // răng cưa vt
+        const turn_speed = 360;// tốc độ quây
+        const tau_thrust = 5; // lực đẩy ban đầu
+        const vatthe_num = 15; // so luong vat the
+        const tau_time_boom = 0.3; // thoi gian nổ tàu khi va chạm
+        const SHOW_BOUNDING = false; //CHECK
+        const SHOW_CENTRE_DOT = false; // ẩn hiện tâm tàu  
+
+        var canv = document.getElementById("MyCanvas");
+        var context = canv.getContext("2d");
+        var vatthe = [];
+
+        // thiết lập tàu
+        class newtau {
+            constructor() {
+                return {
+                    x: canv.width / 2,
+                    y: canv.height / 2,
+                    r: tau_size / 2,
+                    a: 90 * Math.PI / 180,
+                    rot: 0,
+                    explodeTime: 0,
+                    thrusting: false,
+                    thrust: {
+                        x: 0,
+                        y: 0
+                    }
+                }
+            }
+        }
+        //set up
+        class hanhTinh {
+            constructor() {
+            }
+            create() {
+                vatthe = [];
+                var x, y;
+                for (var i = 0; i < vatthe_num; i++) {
+                    do {
+                        x = Math.floor(Math.random() * canv.width);
+                        y = Math.floor(Math.random() * canv.height);
+                    }
+                    while (this.khoangCach(tau.x, tau.y, x, y) < vatthe_size * 2 + tau.r);
+                    vatthe.push(this.newVatthe(x, y))
+                }
+            }
+            khoangCach(x1, y1, x2, y2) {
+                return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            }
+            newVatthe(x, y) {
+                var vt = {
+                    a: Math.random() * Math.PI * 2, // in radians
+                    offs: [],
+                    r: vatthe_size / 2,
+                    vert: Math.floor(Math.random() * (vatthe_dinh + 1) + vatthe_dinh / 2),
+                    x: x,
+                    y: y,
+                    xv: Math.random() * vatthe_vt / FPS * (Math.random() < 0.5 ? 1 : -1),
+                    yv: Math.random() * vatthe_vt / FPS * (Math.random() < 0.5 ? 1 : -1)
+                };
+                // populate the offsets array
+                for (var i = 0; i < vt.vert; i++) {
+                    vt.offs.push(Math.random() * vatthe_rangcua * 2 + 1 - vatthe_rangcua);
+                }
+                return vt;
+            }
+
+        }
+        class game {
+            constructor() {
+            }
+            vacham() {
+                tau.explodeTime = Math.ceil(tau_time_boom * FPS);
+                //console.log("RIP");       
+            }
+
+            update() {
+                var exploding = tau.explodeTime > 0;
+                // vẽ hình nền
+                context.fillStyle = "black";
+                context.fillRect(0, 0, canv.width, canv.height);
+
+
+                // vẽ vật thể
+                var a, r, x, y, offs, vert;
+                for (var i = 0; i < vatthe.length; i++) {
+                    context.fillStyle = "#4c4c12";
+                    context.strokeStyle = "red";
+                    context.lineWidth = tau_size / 20;
+                    // nhận các giá trị từ vật thể
+                    a = vatthe[i].a;
+                    r = vatthe[i].r;
+                    x = vatthe[i].x;
+                    y = vatthe[i].y;
+                    offs = vatthe[i].offs;
+                    vert = vatthe[i].vert;
+
+                    // vẽ hành tinh
+                    context.beginPath();
+                    context.moveTo( // điểm đầu tiên
+                        x + r * offs[0] * Math.cos(a),
+                        y + r * offs[0] * Math.sin(a)
+                    );
+
+                    // điểm thứ 2
+                    for (var j = 1; j < vert; j++) {
+                        context.lineTo(
+                            x + r * offs[j] * Math.cos(a + j * Math.PI * 2 / vert),
+                            y + r * offs[j] * Math.sin(a + j * Math.PI * 2 / vert)
+                        );
+                    }
+                    context.closePath(); // đóng 
+                    context.fill();
+                    context.stroke();
+                    // check va chạm
+                    if (SHOW_BOUNDING) {
+                        context.strokeStyle = "lime";
+                        context.beginPath();
+                        context.arc(x, y, r, 0, Math.PI * 2, false);
+                        context.stroke();
+                    }
+                    // ve tam giac
+                    if (!exploding) {
+                        context.fillStyle = "blue"; //  màu background
+                        context.strokeStyle = 'white';
+                        context.lineWidth = tau_size / 20;
+                        context.beginPath();
+                        context.moveTo(
+                            tau.x + 4 / 3 * tau.r * Math.cos(tau.a),
+                            tau.y - 4 / 3 * tau.r * Math.sin(tau.a)
+                        );
+                        context.lineTo( // left
+                            tau.x - tau.r * (2 / 3 * Math.cos(tau.a) + Math.sin(tau.a)),
+                            tau.y + tau.r * (2 / 3 * Math.sin(tau.a) - Math.cos(tau.a))
+                        );
+                        context.lineTo( // right
+                            tau.x - tau.r * (2 / 3 * Math.cos(tau.a) - Math.sin(tau.a)),
+                            tau.y + tau.r * (2 / 3 * Math.sin(tau.a) + Math.cos(tau.a))
+                        );
+                        context.closePath();// đóng kín
+                        context.fill();
+                        context.stroke();
+                    } else {
+                        context.fillStyle = "darkred";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r * 1.7, 0, Math.PI * 2, false);
+                        context.fill();
+                        context.fillStyle = "red";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r * 1.4, 0, Math.PI * 2, false);
+                        context.fill();
+                        context.fillStyle = "orange";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r * 1.1, 0, Math.PI * 2, false);
+                        context.fill();
+                        context.fillStyle = "yellow";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r * 0.8, 0, Math.PI * 2, false);
+                        context.fill();
+                        context.fillStyle = "white";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r * 0.5, 0, Math.PI * 2, false);
+                        context.fill();
+                        alert("bùm !!! RIP !!!");
+                    }
+                    // check va cham
+                    if (SHOW_BOUNDING) {
+                        context.strokeStyle = "lime";
+                        context.beginPath();
+                        context.arc(tau.x, tau.y, tau.r, 0, Math.PI * 2, false);
+                        context.stroke();
+                    }
+
+                }
+
+
+                //đẩy tàu
+                if (tau.thrusting) {
+                    tau.thrust.x += tau_thrust * Math.cos(tau.a) / FPS;
+                    tau.thrust.y -= tau_thrust * Math.sin(tau.a) / FPS;
+                    // vễ ngọn lửa đít tàu
+                    // draw the thruster
+                    context.fillStyle = "red"; //  màu background
+                    context.strokeStyle = "yellow"; // màu viền
+                    context.lineWidth = tau_size / 10;
+                    context.beginPath();
+                    context.moveTo( // điểm trái
+                        tau.x - tau.r * (2 / 3 * Math.cos(tau.a) + 0.5 * Math.sin(tau.a)),
+                        tau.y + tau.r * (2 / 3 * Math.sin(tau.a) - 0.5 * Math.cos(tau.a))
+                    );
+                    context.lineTo( // điểm trung tâm
+                        tau.x - tau.r * 5 / 3 * Math.cos(tau.a),
+                        tau.y + tau.r * 5 / 3 * Math.sin(tau.a)
+                    );
+                    context.lineTo( // điểm phải
+                        tau.x - tau.r * (2 / 3 * Math.cos(tau.a) - 0.5 * Math.sin(tau.a)),
+                        tau.y + tau.r * (2 / 3 * Math.sin(tau.a) + 0.5 * Math.cos(tau.a))
+                    );
+                    context.closePath(); // đóng kín
+                    context.fill();
+                    context.stroke();
+                } else {
+                    tau.thrust.x -= friction * tau.thrust.x / FPS;
+                    tau.thrust.y -= friction * tau.thrust.y / FPS;
+                }
+
+                // tàu ra khỏi màn hình
+                if (tau.x < 0 - tau.r) {
+                    tau.x = canv.width + tau.r;
+                } else if (tau.x > canv.width + tau.r) {
+                    tau.x = 0 - tau.r;
+                }
+                if (tau.y < 0 - tau.r) {
+                    tau.y = canv.height + tau.r;
+                } else if (tau.y > canv.height + tau.r) {
+                    tau.y = 0 - tau.r;
+                }
+                // tâm tàu
+                if (SHOW_CENTRE_DOT) {
+                    context.fillStyle = "red";
+                    context.fillRect(tau.x - 1, tau.y - 1, 2, 2);
+                }
+                // kiểm tra va chạm tàu
+                if (!exploding) {
+                    for (var i = 0; i < vatthe.length; i++) {
+                        if (ht.khoangCach(tau.x, tau.y, vatthe[i].x, vatthe[i].y) < tau.r + vatthe[i].r) {
+                            // alert("rip");
+                            run.vacham();
+                        }
+
+                    }
+                    // tàu quây
+                    tau.a += tau.rot;
+                    //move tàu
+                    tau.x += tau.thrust.x;
+                    tau.y += tau.thrust.y;
+                }
+                // move the asteroid
+                for (var i = 0; i < vatthe.length; i++) {
+                    vatthe[i].x += vatthe[i].xv;
+                    vatthe[i].y += vatthe[i].yv;
+
+                    // handle asteroid edge of screen
+                    if (vatthe[i].x < 0 - vatthe[i].r) {
+                        vatthe[i].x = canv.width + vatthe[i].r;
+                    } else if (vatthe[i].x > canv.width + vatthe[i].r) {
+                        vatthe[i].x = 0 - vatthe[i].r
+                    }
+                    if (vatthe[i].y < 0 - vatthe[i].r) {
+                        vatthe[i].y = canv.height + vatthe[i].r;
+                    } else if (vatthe[i].y > canv.height + vatthe[i].r) {
+                        vatthe[i].y = 0 - vatthe[i].r
+                    }
+                }
+
+            }
+             // sự kiện nhận phím
+            keydown(ev) {
+                switch (ev.keyCode) {
+                    case 37:
+                        tau.rot = turn_speed / 180 * Math.PI / FPS;// conver to radian =6,3 radian = quay 1 v
+                        break;
+                    case 38:
+                        tau.thrusting = true;
+                        break;
+                    case 39:
+                        tau.rot = -turn_speed / 180 * Math.PI / FPS;
+                        break;
+                    case 40:
+
+                        break;
+                }
+            }
+        
+            keyup(ev) { // sự kiện nhã phím 
+                switch (ev.keyCode) {
+                    case 37:
+                        tau.rot = 0;
+                        break;
+                    case 38:
+                        tau.thrusting = false;
+                        break;
+                    case 39:
+                        tau.rot = 0;
+                        break;
+                    case 40:
+
+                        break;
+                }
+            }
+        }
+        var tau = new newtau();
+        var ht = new hanhTinh();
+        ht.create();
+        var run = new game();
+        // Đăng ký Event JavaScript
+        document.addEventListener("keydown", run.keydown);
+        document.addEventListener("keyup", run.keyup);
+        setInterval(run.update, 1000 / FPS);
+
+    </script>
+</body>
+
+</html>

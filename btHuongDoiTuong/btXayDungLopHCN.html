@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="kq"></p>
+<canvas id="myCanvas" width="1300px" height="700px" style="border:1px solid #d3d3d3;"></canvas>
+<script>
+    class Rectangle {
+        constructor(x,y,width,height)
+        {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
+        dientich(){
+            return this.width * this.height;
+        }
+        chuvi() {
+            return (this.width + this.height) * 2;
+        }
+    }
+    function drawHcn() {
+        var ctx = document.getElementById("myCanvas").getContext("2d");
+        var width  = parseInt(Math.random() * window.innerWidth);
+        var height = parseInt(Math.random() * window.innerHeight);
+        var hcn = new Rectangle(650,350,width,height);
+        ctx.fillRect(hcn.x,hcn.y,hcn.width,hcn.height);
+        document.getElementById("kq").innerHTML="Diện tích HCN là :"+hcn.dientich()+"</br>"+"Chu vi HCN là:"+hcn.chuvi();
+       }
+    drawHcn();
+    //var rectangle = new Rectangle();
+    //alert("Diện tích HCN là :"+rectangle.dientich()+"</br>"+"Chu vi HCN là:"+rectangle.chuvi());
+</script>
+</body>
+</html>

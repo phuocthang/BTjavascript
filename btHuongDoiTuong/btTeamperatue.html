@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function  Teamperature(c) {
+            this.c = c;
+            this.doC = function () {
+               return 9/5*c + 32;
+            }
+            this.Kevlvin = function () {
+                return c + 273,15;
+            }
+    }
+    var teamperature = new Teamperature(25);
+    document.write("Độ (C) sang độ (F) là :"+teamperature.doC()+"</br>"+"Độ (C)sang độ (Kenvin) là :"+teamperature.Kevlvin());
+</script>
+</body>
+</html>

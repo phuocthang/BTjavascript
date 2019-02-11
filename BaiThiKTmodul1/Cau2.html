@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CÂU 2</title>
+</head>
+<body>
+	<script>
+		function findMinxScore(mang,songuyen){
+			var dauTien = mang[0];
+			var mangbandau = mang[0]
+			for(let i = 1; i < mang.length; i++){
+				if(i == songuyen){
+					dauTien = mang[i];
+				}else{
+					mangbandau = mang;
+				}
+			}
+			alert("Mảng ban đầu tại vị trí index là: " + dauTien +"------"+"Mảng ban đầu :" + mangbandau);
+		}
+		var mang = [6,7,8,4];
+		var songuyen = 2;
+		findMinxScore(mang,songuyen);
+	</script>
+</body>
+</html>

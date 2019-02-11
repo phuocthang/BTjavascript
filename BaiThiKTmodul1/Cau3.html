@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Câu 3</title>
+
+</head>
+
+<body>
+
+</body>
+
+<script type="text/javascript">
+
+	function isPrime(number) {
+
+		if (number === 2) {
+
+			return true;
+
+		}
+
+		else if(number > 1){
+
+			for (var i = 2;  i < number; i++) {
+
+				if (number % i !== 0 ) {
+
+					return true;
+
+				}
+
+				else if (number === i * i) {
+
+					return false
+
+				}
+
+				else {
+
+					return false;
+
+				}
+
+			}
+
+		}
+
+		else {
+
+			return false;
+
+		}
+
+	}
+
+	alert(isPrime(4));
+
+</script>
+
+</html>

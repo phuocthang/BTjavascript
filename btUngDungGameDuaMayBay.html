@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body onkeydown="gameBoard.moveMaybay(event)">
+    <canvas id="gameCanvas" width="1320px" height="620px" style="border: 1px solid black;"></canvas>
+    <script>
+    //chieu rong,dai cua BOARD
+    /**
+     * [GAMEBOARD_WIDTH description]
+     * @type {Number}
+     */
+    const GAMEBOARD_WIDTH         = 1320;
+    const GAMEBOARD_HEIGHT        = 620;
+    // NAME images
+    const ORIENTATION_LEFT        = "left1";
+    const ORIENTATION_RIGHT       = "right1";
+    const ORIENTATION_UP          = "up1";
+    const ORIENTATION_DOWN        = "down1";
+    //vi tri xuat hien objec
+    const DEFAULT_NINJA_X_POSITION= 50;
+    const DEFAULT_NINJA_Y_POSITION= 300;
+    // toc do
+    const DEFAULT_NINJA_SPEED     = 20;
+
+    class MayBay {
+        constructor() {
+            this.xPosition = DEFAULT_NINJA_X_POSITION;
+            this.yPosition = DEFAULT_NINJA_Y_POSITION;
+            this.orientation = ORIENTATION_RIGHT;
+            this.speed = DEFAULT_NINJA_SPEED;
+
+
+        }
+        buildImag() {
+            this.image = this.orientation + '.png';
+        };
+
+        move() {
+            switch (this.orientation) {
+                case ORIENTATION_DOWN:
+                    this.yPosition += this.speed;
+                    break;
+                case ORIENTATION_UP:
+                    this.yPosition -= this.speed;
+                    break;
+                case ORIENTATION_LEFT:
+                    this.xPosition -= this.speed;
+                    break;
+                case ORIENTATION_RIGHT:
+                    this.xPosition += this.speed;
+                    break;
+            }
+            this.buildImag();
+
+        };
+        show(ctx) {
+            var image = new Image();
+            var x = this.xPosition;
+            var y = this.yPosition;
+            image.onload = function() {
+                ctx.drawImage(image, x, y);
+            };
+            image.src = './images/' + this.image;
+            this.buildImag();
+        }
+
+    }
+
+    function GameBoard() {
+
+        this.maybay = new MayBay();
+        this.start = function() {
+            this.ctx = document.getElementById('gameCanvas').getContext('2d');
+            this.maybay.show(this.ctx);
+        };
+        this.render = function() {
+            this.ctx.clearRect(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT);
+            this.maybay.show(this.ctx);
+        };
+        this.moveMaybay = function(event) {
+            var orientation = 0;
+            switch (event.which) {
+                case 37:
+                    orientation = ORIENTATION_LEFT;
+                    break;
+                case 38:
+                    orientation = ORIENTATION_UP;
+                    break;
+                case 39:
+                    orientation = ORIENTATION_RIGHT;
+                    break;
+                case 40:
+                    orientation = ORIENTATION_DOWN;
+                    break;
+            }
+            if (orientation) {
+                if (this.maybay.orientation !== orientation) {
+                    this.maybay.orientation = orientation;
+                } else {
+                    this.maybay.move();
+                }
+                this.render();
+            }
+        }
+    }
+    var gameBoard = new GameBoard();
+    gameBoard.start();
+    
+    </script>
+</body>
+
+</html>

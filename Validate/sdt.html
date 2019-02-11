@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function is_usZipCode(str) {
+        // regexp = /^[0-9]{5}(?:-[0-9]{4})?$/;
+        //regexp = /^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)$/;kiểm tra email
+
+
+        regexp = /^[0-9]{2}(?:-[0-9]{10})?$/;//24-2984896489" ?:kiem tra ky tu trung khop ky tu dau ,here:(-)
+        if (regexp.test(str)=== true) {
+            alert("hop le");
+        }else {
+            alert("erros");
+        }
+    }
+
+    var zipcode = "24-2984896489";
+    console.log(is_usZipCode(zipcode));
+</script>
+</body>
+</html>
